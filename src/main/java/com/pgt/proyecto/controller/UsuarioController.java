@@ -1,5 +1,8 @@
 package com.pgt.proyecto.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,6 +48,7 @@ public class UsuarioController {
 			
 			//Hash the password
 			usuario.setPassword(DigestUtils.md5DigestAsHex(usuario.getPassword().getBytes()));
+			usuario.setRole("USER");
 			
 			//Save the user
 			usuarioservice.create(usuario);
@@ -58,13 +62,16 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/check")
-	public String check(@ModelAttribute("usuario") UsuarioDTO usuario, Model model) {
-		if(!usuarioservice.findLogin(usuario.getName(), DigestUtils.md5DigestAsHex(usuario.getPassword().getBytes()))) {
+	public String check(@ModelAttribute("usuario") UsuarioDTO usuario, Model model, HttpServletResponse response) {
+		String key = DigestUtils.md5DigestAsHex(usuario.getPassword().getBytes());
+		UsuarioDTO authUsusario = usuarioservice.findLogin(usuario.getName(), key);
+		
+		if(authUsusario == null) {
 			model.addAttribute("errorMessage", "Invalid login data");
 			return "usuario/login";
 		}
-			
 
-		return "redirect:/club/list";
+		response.addCookie(new Cookie("auth", authUsusario.getId().toString()));
+		return "club/list";
 	}
 }

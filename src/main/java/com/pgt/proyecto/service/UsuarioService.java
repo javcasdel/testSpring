@@ -8,7 +8,7 @@ public interface UsuarioService {
 
 	List<UsuarioDTO> findAll(String name);
 	
-	Boolean findLogin(String name, String password);
+	UsuarioDTO findLogin(String name, String password);
 
 	UsuarioDTO findById(Integer id);
 

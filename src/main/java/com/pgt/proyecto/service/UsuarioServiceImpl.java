@@ -46,7 +46,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 
 	@Override
-	public Boolean findLogin(String name, String password) {
-		return dao.findLogin(name, password) != null;
+	public UsuarioDTO findLogin(String name, String password) {
+		return mapper.mapToDTO(dao.findLogin(name, password));
 	}
 }

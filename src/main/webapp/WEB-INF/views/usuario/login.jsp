@@ -20,7 +20,7 @@
 		<form:input path="password"/>
 		<form:errors path="password"/>
 		
-		<input type="submit" value="Create"/>
+		<input type="submit" value="Login"/>
 	</form:form>
 	
 	<jstl:if test="${errorMessage != null}">
