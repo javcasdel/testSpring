@@ -10,6 +10,13 @@
 </head>
 <body>
 	<b>Login:<br></b>
+	
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+	<script type="text/javascript">
+		if(${logout}){
+			Cookies.set("auth", "false");
+		}
+	</script>
 
 	<form:form action="/usuario/check" modelAttribute="usuario">
 		<form:label path="name">Name</form:label>
@@ -22,6 +29,8 @@
 		
 		<input type="submit" value="Login"/>
 	</form:form>
+	
+	<button onclick="window.location.replace('/usuario/create')">Create new user</button>
 	
 	<jstl:if test="${errorMessage != null}">
 		<jstl:out value="${errorMessage}" />

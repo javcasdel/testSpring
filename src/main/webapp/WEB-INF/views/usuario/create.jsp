@@ -20,8 +20,15 @@
 		<form:input path="password"/>
 		<form:errors path="password"/>
 		
+		<form:select path="role">
+			<form:option value="USER">User</form:option>
+			<form:option value="ADMIN">Administrator</form:option>
+		</form:select>
+		
 		<input type="submit" value="Create"/>
 	</form:form>
+	
+	<button onclick="window.location.replace('/usuario/login')">Login as existing user</button>
 	
 	<jstl:if test="${errorMessage != null}">
 		<jstl:out value="${errorMessage}" />
