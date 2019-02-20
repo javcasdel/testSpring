@@ -17,7 +17,7 @@
 		<form:errors path="name"/>
 		
 		<form:label path="password">Password</form:label>
-		<form:input path="password"/>
+		<form:input path="password" type="password"/>
 		<form:errors path="password"/>
 		
 		<form:select path="role">
