@@ -33,8 +33,10 @@
 	
 	<br>
 	
-	<input type="button" onclick="javascript: window.location.replace('/corredor/create')" value="Create">
-	
+	<jstl:if test="${authUser != null && authUser.role.equals('ADMIN')}">
+		<input type="button" onclick="javascript: window.location.replace('/corredor/create')" value="Create">
+	</jstl:if>
+		
 	<jstl:if test="${errorMessage != null}">
 		<jstl:out value="${errorMessage}" />
 	</jstl:if>
